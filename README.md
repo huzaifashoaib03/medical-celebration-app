@@ -1,23 +1,43 @@
-# 🎉 Medical Achievement Celebration Web App
+🎉 Milestone Celebration Web App
+A high-performance, interactive web application designed to celebrate academic and professional achievements. This project combines smooth animations with a fun mini-game to create a memorable user experience.
 
-A high-performance, interactive celebration web application built to commemorate academic and professional milestones. Originally designed for a medical graduation celebration, featuring a smooth "Heart Catch" mini-game and optimized for mobile performance.
+🚀 Live Demo
+You can view the live project here: [https://congratulations-sis.netlify.app/]
 
-## 🚀 Live Demo
-[Insert your Netlify/Vercel Link here]
+✨ Key Features
+Interactive Mini-Game: Includes a "Heart Catch" game to engage users before the final reveal.
 
-## ✨ Key Features
-- **Smooth Animations:** Optimized falling decorations using CSS Hardware Acceleration (GPU).
-- **Interactive Mini-game:** A lightweight "Catch 10 Hearts" game with enhanced touch responsiveness for mobile users.
-- **Glassmorphism UI:** Modern countdown screen featuring blur effects and high-fidelity styling.
-- **Mobile First Design:** Tested on mid-range devices (Infinix Note series) to ensure 60FPS performance.
-- **Responsive SVG Art:** Dynamic festive lighting using SVG path calculations.
+Mobile-First Optimization: Built with CSS Hardware Acceleration (GPU layering) to ensure 60FPS performance on mid-range mobile devices (e.g., Infinix, Samsung A-series).
 
-## 🛠️ Tech Stack
-- **Frontend:** HTML5, CSS3 (Custom Properties, Keyframes), JavaScript (ES6+).
-- **Optimization:** GPU Layering, `will-change` properties, and Event Listener tuning for low-latency touch response.
+Modern UI/UX: Features a sleek Glassmorphism countdown and elegant typography.
 
-## 📸 Preview
-*(Add a screenshot of the final card or the game here)*
+Responsive Design: Fully functional across all screen sizes, from mobile phones to desktops.
 
----
-*Developed with ❤️ for specialized celebrations.*
+🛠️ Personalization (How to Customize)
+This project is designed to be easily adaptable for your loved ones. You can change the photo and message in just a few seconds:
+
+Add Your Photo: Place your desired image (e.g., friend.jpg) into the project folder.
+
+Update the Path: Open index.html and locate the following line:
+
+HTML
+<img src="sister.jpeg" alt="Celebration Image" class="sister-img">
+Change the Name: Replace sister.jpeg with your image's filename, such as src="friend.jpg".
+
+Edit the Text: Update the name and the congratulatory message within the HTML to suit your occasion.
+
+💻 Tech Stack
+Languages: HTML5, CSS3 (Custom Properties, Keyframes), Vanilla JavaScript (ES6+).
+
+Performance: Optimized using will-change properties and low-latency touch event listeners.
+
+Styling: Google Fonts (Dancing Script & Poppins) for a premium look.
+
+📂 Project Structure
+index.html: Contains the core logic, styles, and game engine.
+
+sister.jpeg: The default display image for the celebration card.
+
+README.md: Project documentation and setup guide.
+
+Developed with ❤️ by Huzaifa Shoaib
