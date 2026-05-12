@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Congratulations Dr. Sister</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ffb7c5;
+            --dark-pink: #ff4d6d;
+            --gold: #ffd700;
+            --soft-pink: #fff0f3;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; font-family: 'Poppins', sans-serif;
+            background-color: var(--soft-pink);
+            touch-action: none; /* Prevents scrolling lag */
+        }
+
+        #celebration-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5;
+        }
+
+        .decoration-svg {
+            position: fixed; top: -10px; left: 0; width: 100%; height: 25vh;
+            z-index: 10; pointer-events: none;
+        }
+        .string-path { fill: none; stroke: rgba(0,0,0,0.1); stroke-width: 1; }
+        
+        /* Optimized Flashing */
+        .bulb { animation: flash var(--d, 1.2s) infinite alternate; will-change: opacity; }
+        @keyframes flash { 
+            from { opacity: 0.4; } 
+            to { opacity: 1; filter: brightness(1.3); } 
+        }
+
+        #game-header {
+            position: fixed; top: 18vh; width: 100%; display: flex;
+            justify-content: center; z-index: 100;
+        }
+        .score-board {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 25px; border-radius: 50px;
+            border: 2px solid var(--dark-pink); color: var(--dark-pink);
+            font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive & Smooth Hearts */
+        .target-heart {
+            position: absolute; 
+            cursor: pointer; 
+            font-size: 45px;
+            padding: 20px; /* Bigger hit area for touch */
+            margin: -20px; /* Offset padding */
+            top: -80px; 
+            z-index: 50;
+            will-change: transform; /* Hardware acceleration */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Glass Countdown */
+        #countdown-screen {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 183, 197, 0.2); backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 200; justify-content: center; align-items: center;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 30px; text-align: center; width: 85%; max-width: 320px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        #timer-num { font-size: 80px; font-weight: 700; color: white; text-shadow: 0 0 15px var(--dark-pink); }
+
+        /* Final Results */
+        #final-stage {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 300; justify-content: center; align-items: center; padding: 20px;
+        }
+
+        .final-photo-card {
+            background: white; padding: 15px; border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); text-align: center;
+            width: 100%; max-width: 360px; transform: scale(0.9); 
+            opacity: 0; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+            max-height: 85vh; overflow-y: auto; z-index: 310;
+        }
+
+        .sister-img { width: 100%; height: auto; border-radius: 15px; margin-bottom: 15px; }
+        .congrats-text { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--dark-pink); }
+        .wishes-box { background: var(--soft-pink); padding: 15px; border-radius: 12px; border: 1.5px dashed var(--dark-pink); font-size: 0.85rem; color: #444; }
+
+        /* Smooth Falling Animation */
+        .falling-decor {
+            position: absolute;
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        @keyframes fall { 
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="celebration-bg"></div>
+
+    <svg class="decoration-svg" id="light-svg" viewBox="0 0 500 200" preserveAspectRatio="none">
+        <path id="p1" class="string-path" d="M50,0 Q250,100 450,0" />
+        <path id="p2" class="string-path" d="M20,0 Q250,160 480,0" />
+        <path id="p3" class="string-path" d="M-10,0 Q250,220 510,0" />
+    </svg>
+
+    <div id="game-header">
+        <div class="score-board">COLLECT 10 HEARTS: <span id="count">0</span>/10</div>
+    </div>
+
+    <div id="game-container" style="height: 100vh; width: 100%; position: relative; z-index: 40;"></div>
+
+    <div id="countdown-screen">
+        <div class="glass-card">
+            <h2 style="color:var(--dark-pink)">Great Job! ❤️</h2>
+            <div id="timer-num">10</div>
+            <p style="color: #444; font-size: 0.8rem;">Wait 10 seconds for the next level...</p>
+        </div>
+    </div>
+
+    <div id="final-stage">
+        <div class="final-photo-card" id="final-card">
+            <img src="cartoon.avif" alt="Dr. Maryam Shoaib" class="sister-img">
+            <div class="congrats-text">Congratulations</div>
+            <h3 style="margin:5px 0;">Dr Sister</h3>
+            <div class="wishes-box">
+                "On this beautiful day, we celebrate your incredible achievement. Your journey to becoming a doctor has been a testament to your unwavering dedication and kindness. May your future be filled with healing, success, and the immense joy you bring to everyone around you. You truly are our pride and our star!"
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const bg = document.getElementById('celebration-bg');
+        const gameContainer = document.getElementById('game-container');
+        const decorItems = ['❤️', '🌸', '🌼', '✨', '💖'];
+        let count = 0;
+
+        // Optimized Background Rain
+        function createDecor() {
+            if (document.querySelectorAll('.falling-decor').length > 25) return; // Limit elements
+            const item = document.createElement('div');
+            item.className = 'falling-decor';
+            item.innerHTML = decorItems[Math.floor(Math.random() * decorItems.length)];
+            item.style.left = Math.random() * 95 + 'vw';
+            item.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            item.style.opacity = Math.random() * 0.5 + 0.3;
+            const duration = Math.random() * 3 + 4;
+            item.style.animation = `fall ${duration}s linear forwards`;
+            bg.appendChild(item);
+            setTimeout(() => item.remove(), duration * 1000);
+        }
+        setInterval(createDecor, 300);
+
+        // Optimized Heart Collection
+        function createTargetHeart() {
+            if(count >= 10) return;
+            const h = document.createElement('div');
+            h.innerHTML = '💗';
+            h.className = 'target-heart';
+            h.style.left = Math.random() * 80 + 5 + 'vw';
+            const duration = 3;
+            h.style.animation = `fall ${duration}s linear forwards`;
+            
+            const collect = (e) => {
+                e.preventDefault();
+                count++;
+                document.getElementById('count').innerText = count;
+                h.remove();
+                if(count === 10) startCountdown();
+            };
+
+            // Touch and Click both for 100% response
+            h.addEventListener('touchstart', collect, {passive: false});
+            h.addEventListener('mousedown', collect);
+
+            gameContainer.appendChild(h);
+            setTimeout(() => h.remove(), duration * 1000);
+        }
+        let gameInt = setInterval(createTargetHeart, 1000);
+
+        function startCountdown() {
+            clearInterval(gameInt);
+            document.getElementById('game-header').style.display = 'none';
+            document.getElementById('countdown-screen').style.display = 'flex';
+            let time = 10;
+            const int = setInterval(() => {
+                time--;
+                document.getElementById('timer-num').innerText = time;
+                if(time <= 0) {
+                    clearInterval(int);
+                    showFinal();
+                }
+            }, 1000);
+        }
+
+        function showFinal() {
+            document.getElementById('countdown-screen').style.display = 'none';
+            document.getElementById('final-stage').style.display = 'flex';
+            const card = document.getElementById('final-card');
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1)';
+        }
+
+        // SVG Lights Logic (Simple)
+        const paths = ['p1', 'p2', 'p3'];
+        const colors = ['#ff4d6d', '#ffd700', '#ffffff'];
+        paths.forEach((id, idx) => {
+            const p = document.getElementById(id);
+            const len = p.getTotalLength();
+            for(let i=0; i<=10; i++) {
+                const pt = p.getPointAtLength((i/10)*len);
+                const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+                c.setAttribute("cx",pt.x); c.setAttribute("cy",pt.y); c.setAttribute("r","3.5");
+                c.setAttribute("fill", colors[i%3]); c.setAttribute("class","bulb");
+                c.style.setProperty('--d', (Math.random()+0.5)+'s');
+                document.getElementById('light-svg').appendChild(c);
+            }
+        });
+    </script>
+</body>
+</html>
