@@ -1,43 +1,29 @@
-🎉 Milestone Celebration Web App
-A high-performance, interactive web application designed to celebrate academic and professional achievements. This project combines smooth animations with a fun mini-game to create a memorable user experience.
+# 🎊 MILESTONE CELEBRATION WEB APP
 
-🚀 Live Demo
-You can view the live project here: [https://congratulations-sis.netlify.app/]
+A high-performance, interactive celebration platform built to commemorate academic and professional milestones. Optimized for mobile responsiveness and smooth animations.
 
-✨ Key Features
-Interactive Mini-Game: Includes a "Heart Catch" game to engage users before the final reveal.
+---
 
-Mobile-First Optimization: Built with CSS Hardware Acceleration (GPU layering) to ensure 60FPS performance on mid-range mobile devices (e.g., Infinix, Samsung A-series).
+## 🚀 LIVE DEMO
+Experience the interactive celebration here:  
+👉 **[View Live Project](https://congratulations-sis.netlify.app/)**
 
-Modern UI/UX: Features a sleek Glassmorphism countdown and elegant typography.
+---
 
-Responsive Design: Fully functional across all screen sizes, from mobile phones to desktops.
+## ✨ KEY FEATURES
 
-🛠️ Personalization (How to Customize)
-This project is designed to be easily adaptable for your loved ones. You can change the photo and message in just a few seconds:
+*   **🎮 INTERACTIVE MINI-GAME:** Features a "Heart Catch" game to engage users before the grand reveal.
+*   **📱 MOBILE-FIRST OPTIMIZATION:** Built with **CSS Hardware Acceleration** to ensure 60FPS performance on mobile devices.
+*   **💎 MODERN UI:** Elegant **Glassmorphism** countdown screen with premium typography.
+*   **⚡ LIGHTWEIGHT:** Zero external libraries—built entirely with Vanilla JavaScript and CSS3.
 
-Add Your Photo: Place your desired image (e.g., friend.jpg) into the project folder.
+---
 
-Update the Path: Open index.html and locate the following line:
+## 🛠️ HOW TO CUSTOMIZE (Personal Use)
 
-HTML
-<img src="sister.jpeg" alt="Celebration Image" class="sister-img">
-Change the Name: Replace sister.jpeg with your image's filename, such as src="friend.jpg".
+This project is designed to be easily adaptable for your loved ones. You can change the photo and message in two simple steps:
 
-Edit the Text: Update the name and the congratulatory message within the HTML to suit your occasion.
-
-💻 Tech Stack
-Languages: HTML5, CSS3 (Custom Properties, Keyframes), Vanilla JavaScript (ES6+).
-
-Performance: Optimized using will-change properties and low-latency touch event listeners.
-
-Styling: Google Fonts (Dancing Script & Poppins) for a premium look.
-
-📂 Project Structure
-index.html: Contains the core logic, styles, and game engine.
-
-sister.jpeg: The default display image for the celebration card.
-
-README.md: Project documentation and setup guide.
-
-Developed with ❤️ by Huzaifa Shoaib
+### 1. Update the Image
+Place your desired photo in the project folder and update the following line in `index.html`:
+```html
+<img src="your-photo.jpg" alt="Celebration Image" class="sister-img">
